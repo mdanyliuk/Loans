@@ -1,0 +1,51 @@
+<h1 class="mt-3 mb-3">Loans of player {{playerName}}</h1>
+
+<table class="table">
+
+    <thead class="thead-dark">
+        <tr>
+            <th>Event</th>
+            <th>Sum</th>
+            <th>Paid</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let tempLoan of loans">
+            <td>{{ tempLoan.eventName}}</td>
+            <td>{{ tempLoan.sum| number:'1.2-2'}}</td>
+            <td>
+                <input type="checkbox" [checked]="tempLoan.paid" disabled>
+            </td>
+        </tr>
+
+        <tr>
+            <td style="font-weight: bold">Total Sum</td>
+            <td style="font-weight: bold">{{totalSum| number:'1.2-2'}}</td>
+            <td style="font-weight: bold"></td>
+        </tr>
+    </tbody>
+</table>
+
+<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#payLoansModal">Pay all loans</button>
+
+<div class="modal fade" id="payLoansModal" tabindex="-1" role="dialog" aria-labelledby="payLoansModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="payLoansModalLabel">Pay loans</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="title">Are you sure you want to pay {{totalSum| number:'1.2-2'}}?</label>
+            </div>
+            <div class="modal-footer">
+                <button (click)="payLoansClick()" class="btn btn-dark">Pay</button>
+            </div>
+        </div>
+
+    </div>
+</div>

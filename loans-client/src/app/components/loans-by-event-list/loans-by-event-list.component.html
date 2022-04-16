@@ -1,0 +1,45 @@
+<h1 class="mt-3 mb-3">Loans for event "{{eventName}}"</h1>
+
+<button type="button" class="btn btn-dark"
+data-bs-toggle="modal" data-bs-target="#addLoanModal"
+(click)="addLoanClick()"
+>Add loan</button>
+
+<div class="modal fade" id="addLoanModal" tabindex="-1" role="dialog" aria-labelledby="addLoanModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addLoanModalLabel">Add loan</h5>
+            <button type="button" class="close" 
+            data-bs-dismiss="modal" aria-label="Close"
+            (click)="closeClick()" >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <app-add-loan-by-event [loan]="loan" *ngIf="activateAddLoanComp">
+          </app-add-loan-by-event>
+          
+        </div>
+      </div>
+</div>
+
+<table class="table">
+
+    <thead class="thead-dark">
+        <tr>
+            <th>Player</th>
+            <th>Sum</th>
+            <th>Paid</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <tr *ngFor="let tempLoan of loans">
+            <td>{{ tempLoan.playerName}}</td>
+            <td>{{ tempLoan.sum| number:'1.2-2'}}</td>
+            <td>
+                <input type="checkbox" [checked]="tempLoan.paid" disabled>
+            </td>
+        </tr>
+    </tbody>
+</table>
